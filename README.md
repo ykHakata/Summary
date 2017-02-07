@@ -8,3 +8,4 @@ Summary - まとめた記事
 - [cpanm_sakura](cpanm_sakura.md) - cpanm をさくらのレンタルサーバーで利用するやり方
 - [perl6_trial](perl6_trial.md) - perl6 使い方簡単まとめ
 - [perl5_install](perl5_install.md) - perl5 ローカル環境での設定手順
+- [mysql_trial](mysql_trial.md) - mysql 使い方簡単まとめ

@@ -63,7 +63,7 @@ Mac の場合の手順を読めば理解はしてもらえる
 
 Windows に Perl5 はインストールされておらず、インストールが必要である
 
-[ActiveState](http://www.activestate.com/activeperl) もしくは [StrawberryPerl](http://strawberryperl.com/) が無難だ
+[ActivePerl](http://www.activestate.com/activeperl) もしくは [StrawberryPerl](http://strawberryperl.com/) が無難だ
 
 他にも環境構築は様々な方法があるが、本格的に開発をしようとなると途端に難易度が高くなる
 

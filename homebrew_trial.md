@@ -126,4 +126,4 @@ brew list mysql
 関連項目
 
 - <http://brew.sh/index_ja.html> Homebrew (日本語)
-- [summary](/) - summary - まとめ記事
+- [summary](README.md) - summary - まとめ記事一覧

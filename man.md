@@ -116,7 +116,26 @@ SYNOPSIS (シノプシス)
 
 DESCRIPTION
 
+    直訳 - 説明
+    意味 - コマンドに関する詳細な説明
+
+    例: cat の場合
+
+    The cat utility reads files sequentially, ...
+    (このように英語で説明文や)
+
+    The options are as follows:
+
+    -b      Number the non-blank output lines, starting at 1.
+    ...
+    (オプションについての説明などが記述されている)
+
 FILES
+
+    直訳 - ファイル
+    意味 - コマンドに関連したファイル名が絶対パスで記されている
+
+
 
 SEE ALSO
 

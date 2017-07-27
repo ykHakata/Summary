@@ -12,3 +12,4 @@ summary - まとめ記事
 - [mysql_trial](mysql_trial.md) - mysql 使い方簡単まとめ
 - [perl5_install](perl5_install.md) - perl5 ローカル環境での設定手順
 - [perl6_trial](perl6_trial.md) - perl6 使い方簡単まとめ
+- [ssh_sakura](ssh_sakura.md) - さくらのレンタルサーバー (スタンダード) での ssh 利用

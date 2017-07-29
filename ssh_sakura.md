@@ -24,7 +24,7 @@ ssh_sakura - さくらのレンタルサーバー (スタンダード) での ss
 
 ## Github との接続の確認
 
-```bash
+```Shell
 $ ssh -T git@github.com
 ```
 

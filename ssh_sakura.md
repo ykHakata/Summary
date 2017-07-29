@@ -24,13 +24,13 @@ ssh_sakura - さくらのレンタルサーバー (スタンダード) での ss
 
 ## Github との接続の確認
 
-```sh
+```bash
 $ ssh -T git@github.com
 ```
 
 ### sakura レンタルサーバーで git clone によるリボジトリの生成
 
-```sh
+```Tcsh
 # 例: リポジトリ git@github.com:ykHakata/yonabe.git
 % git clone git@github.com:ykHakata/yonabe.git
 ```

@@ -6,6 +6,11 @@ ssh_sakura - さくらのレンタルサーバー (スタンダード) での ss
 
 # SYNOPSIS
 
+## 読み方
+
+- __local__ -> ローカル(Mac)の画面 bash
+- __sakura__ -> さくらのレンタルサーバー内の画面 csh
+
 ## ローカル側(mac)とレンタルサーバー
 
 ```
@@ -24,21 +29,27 @@ ssh_sakura - さくらのレンタルサーバー (スタンダード) での ss
 
 ## Github との接続の確認
 
-```Shell
+__local__
+
+```
 $ ssh -T git@github.com
 ```
 
 ### sakura レンタルサーバーで git clone によるリボジトリの生成
 
-```Tcsh
-# 例: リポジトリ git@github.com:ykHakata/yonabe.git
+__sakura__
+
+```
+(例: リポジトリ git@github.com:ykHakata/yonabe.git)
 % git clone git@github.com:ykHakata/yonabe.git
 ```
 
 ### Github より pull - sakura レンタルサーバーへ
 
-```sh
-# git リポジトリのある場所へ
+__sakura__
+
+```
+(git リポジトリのある場所へ)
 % pwd
 /home/yonabemt/www/yonabe
 
@@ -60,12 +71,16 @@ __記事の内容は下記のアカウント情報でのやり方レンタルサ
 
 ### パスワードでの ssh 接続
 
+__local__
+
 ```
 $ ssh yonabemt@yonabemt.sakura.ne.jp
 (パスワード入力)
 ```
 
 ### レンタルサーバー内に公開鍵の設置
+
+__sakura__
 
 ```
 % pwd
@@ -92,18 +107,22 @@ drwx------    2 yonabemt  users   512 Mar 13  2009 .ssh
 
 ### 鍵の準備
 
-```
-ローカル側で鍵のペアを作る前に、すでに作られているかを確認
+__ローカル側で鍵のペアを作る前に、すでに作られているかを確認__
 
-ローカル側(mac)に移動
+```
+id_rsa -> (秘密鍵)
+id_rsa.pub -> (公開鍵)
+```
+
+__local__
+
+```
+(ローカル側(mac)に移動)
 $ ls -a ~/.ssh/
 .       config      id_rsa.pub
 ..      id_rsa      known_hosts
 
-すでに存在するので今回はそのまま流用
-
-id_rsa -> (秘密鍵)
-id_rsa.pub -> (公開鍵)
+(すでに存在するので今回はそのまま流用)
 
 $ chmod 600 ~/.ssh/id_rsa.pub
 (念の為にパーミッションを変更)
@@ -120,10 +139,16 @@ id_rsa.pub                                              100%  401     0.4KB/s   
 
 ### 鍵認証でログイン
 
+__local__
+
 ```
 $ ssh -i ~/.ssh/id_rsa yonabemt@yonabemt.sakura.ne.jp
 (ローカル(mac)から鍵をつかってログイン)
+```
 
+__sakura__
+
+```
 Welcome to FreeBSD!
 
 %
@@ -145,9 +170,15 @@ Welcome to FreeBSD!
 
 ### レンタルサーバー内で鍵の生成
 
+__local__
+
 ```
 $ ssh yonabemt@yonabemt.sakura.ne.jp
+```
 
+__sakura__
+
+```
 % ls -a ~/.ssh/
 .  ..  authorized_keys
 
@@ -171,10 +202,16 @@ New SSH key クリック
 
 Title -> sakura_standard_yonabemt
 key -> 公開鍵の内容をコピペする
+```
 
-$ cat ~/.ssh/id_rsa.pub
+__sakura__
+
+```
+% cat ~/.ssh/id_rsa.pub
 (cat コマンドで標準出力し内容をコピペ)
+```
 
+```
 貼り付ける範囲は
 ssh-rsa ... から
 == '任意のコメント' 改行
@@ -184,6 +221,8 @@ ssh-rsa ... から
 ```
 
 ### 接続の確認
+
+__sakura__
 
 ```
 % ssh -T git@github.com
@@ -215,6 +254,8 @@ Create repository -> クリック
 
 ### ローカル環境でリポジトリにコンテンツを追加
 
+__local__
+
 ```
 $ cd ~/Github/
 $ git clone git@github.com:ykHakata/yonabe.git
@@ -230,6 +271,8 @@ $ git push origin master
 ```
 
 ### レンタルサーバーで git clone によるリボジトリの生成
+
+__sakura__
 
 ```
 % which git
@@ -253,6 +296,8 @@ nothing to commit, working directory clean
 
 ### ローカル環境でコンテンツ修正、Github へ push
 
+__local__
+
 ```
 (コンテンツ修正後)
 
@@ -262,6 +307,8 @@ $ git push origin master
 ```
 
 ### レンタルサーバーへ、Github より pull
+
+__sakura__
 
 ```
 % pwd

@@ -446,6 +446,8 @@ mysql> DESCRIBE answers;
 
 # EXAMPLE
 
+## 削除
+
 ```sql
 -- データーベースのカラムを削除
 -- ALTER TABLE table DROP [COLUMN] column
@@ -459,6 +461,21 @@ ALTER TABLE staff DROP name;
 ALTER TABLE staff
     DROP COLUMN name,
     DROP COLUMN birthday;
+```
+
+## バックアップ
+
+```
+(全てのデーターベース、テーブル、レコード)
+$ mysqldump --user=hackers --password --events --all-databases > all_dump.sql
+(指定のデータベース、テーブル、レコード)
+$ mysqldump --user=hackers --password --databases hackers > hackers_all_dump.sql
+(指定のデータベース、テーブル)
+$ mysqldump --user=hackers --password --databases --no-data hackers > hackers_schema_dump.sql
+(指定のデーターベースのテーブルスキーマーのみ)
+$ mysqldump --user=hackers --password --no-data hackers > hackers_table_schema_dump.sql
+(指定のデーターベースのテーブルレコードのみ)
+$ mysqldump --user=hackers --password --no-create-info hackers > hackers_data_dump.sql
 ```
 
 # SEE ALSO

@@ -102,12 +102,38 @@ OS を再インストールする
 各種設定 -> OS インストール -> 標準 OS インストール
 新しい root パスワード入力 (8文字以上、半角英数組合せ)
 標準 OS の CentOS6 選択
+スタートアップスクリプトは無効
 稼働中の表示が出るまで待機
 ```
 
 ## OS の基本設定
 
 ローカルより vps サーバーへアクセス
+
+__アクセスできない場合__
+
+```
+ssh: connect to host 153.126.137.205 port 22: Connection refused
+(こういうときはサーバーを再起動してみる)
+```
+
+__yum がうまくいかない場合__
+
+```
+# yum update
+Loaded plugins: fastestmirror, security
+Setting up Update Process
+Loading mirror speeds from cached hostfile
+ * base: ftp.iij.ad.jp
+ * epel: ftp.riken.jp
+ * extras: ftp.iij.ad.jp
+ * updates: ftp.iij.ad.jp
+Error: Cannot retrieve repository metadata (repomd.xml) for repository: extras. Please verify its path and try again
+
+(このような場合は)
+# yum clean all
+# yum update
+```
 
 ```
 # はスーパーユーザー
@@ -180,6 +206,8 @@ SYSFONT="latarcyrheb-sun16"
 
 (日本語で表示になっている)
 [root@tk2-257-38266 ~]# man man
+
+(もしうまくいかないばいは一旦ログアウト後ログイン)
 ```
 
 ## ユーザー作成

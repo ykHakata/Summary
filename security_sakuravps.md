@@ -75,6 +75,16 @@ web サーバーは 80 ポートを利用するため、解放する必要があ
 /sbin/iptables
 
 # cd /etc/sysconfig
+
+(すでに iptables.old がつくられてる)
+# ls -al ip*
+-rw-------. 1 root root  560 12月  6 19:11 2016 ip6tables
+-rw-------. 1 root root 1988  7月 24 11:10 2015 ip6tables-config
+-rw-------. 1 root root  560 12月  6 19:11 2016 ip6tables.old
+-rw-------. 1 root root  476 12月  6 19:11 2016 iptables
+-rw-------. 1 root root 1974  7月 24 11:10 2015 iptables-config
+-rw-------. 1 root root  476 12月  6 19:11 2016 iptables.old
+(修正)
 # vim iptables
 ```
 

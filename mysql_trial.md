@@ -463,6 +463,53 @@ ALTER TABLE staff
     DROP COLUMN birthday;
 ```
 
+## パスワード設定
+
+インストール初期時は root にパスワードはない
+
+```
+$ mysql -u root
+mysql> SELECT User, Host, Password FROM mysql.user;
++---------+------------------+-------------------------------------------+
+| User    | Host             | Password                                  |
++---------+------------------+-------------------------------------------+
+| root    | localhost        |                                           |
+| root    | yk-no-imac.local |                                           |
+| root    | 127.0.0.1        |                                           |
+| root    | ::1              |                                           |
+|         | localhost        |                                           |
+|         | yk-no-imac.local |                                           |
+| hackers | localhost        | *8660BAF96F091F55F5D0593EF61DA65B6CA84088 |
++---------+------------------+-------------------------------------------+
+7 rows in set (0.03 sec)
+
+(**** は任意の文字列)
+mysql> UPDATE mysql.user SET Password = PASSWORD('****') WHERE User = 'root';
+Query OK, 4 rows affected (0.06 sec)
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected (0.00 sec)
+
+(登録された)
+mysql> SELECT User, Host, Password FROM mysql.user;
++---------+------------------+-------------------------------------------+
+| User    | Host             | Password                                  |
++---------+------------------+-------------------------------------------+
+| root    | localhost        | *4FD439787F5AAF3CE2D68610AA04100CC93AA41E |
+| root    | yk-no-imac.local | *4FD439787F5AAF3CE2D68610AA04100CC93AA41E |
+| root    | 127.0.0.1        | *4FD439787F5AAF3CE2D68610AA04100CC93AA41E |
+| root    | ::1              | *4FD439787F5AAF3CE2D68610AA04100CC93AA41E |
+|         | localhost        |                                           |
+|         | yk-no-imac.local |                                           |
+| hackers | localhost        | *8660BAF96F091F55F5D0593EF61DA65B6CA84088 |
++---------+------------------+-------------------------------------------+
+7 rows in set (0.00 sec)
+
+(次回からはパスワードがないとログインできない)
+
+$ mysql -u root -p
+Enter password:
+```
+
 ## バックアップ
 
 ```
@@ -476,6 +523,21 @@ $ mysqldump --user=hackers --password --databases --no-data hackers > hackers_sc
 $ mysqldump --user=hackers --password --no-data hackers > hackers_table_schema_dump.sql
 (指定のデーターベースのテーブルレコードのみ)
 $ mysqldump --user=hackers --password --no-create-info hackers > hackers_data_dump.sql
+```
+
+## 復元
+
+```
+(ユーザーができていること)
+$ mysql --user=hackers --password < all_dump.sql
+(データベースの作成からデータまで復元)
+$ mysql --user=hackers --password < hackers_all_dump.sql
+(データベースの作成からテーブルスキーマーまで復元)
+$ mysql --user=hackers --password < hackers_schema_dump.sql
+(指定のデーターベースのテーブルスキーマーのみ、データベースができていること)
+$ mysql --user=hackers --password hackers < hackers_table_schema_dump.sql
+(指定のデーターベースのテーブルレコードにデータを復元、テーブルスキーマーができてること)
+$ mysql --user=hackers --password hackers < hackers_data_dump.sql
 ```
 
 # SEE ALSO

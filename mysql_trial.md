@@ -485,6 +485,10 @@ mysql> SELECT User, Host, Password FROM mysql.user;
 
 (**** は任意の文字列)
 mysql> UPDATE mysql.user SET Password = PASSWORD('****') WHERE User = 'root';
+
+(5.7から Password から authentication_string)
+> UPDATE mysql.user SET authentication_string=PASSWORD('****') WHERE User='root';
+
 Query OK, 4 rows affected (0.06 sec)
 mysql> FLUSH PRIVILEGES;
 Query OK, 0 rows affected (0.00 sec)

@@ -123,6 +123,15 @@ Welcome to nginx on EPEL!
 ポートの設定については事前に iptables で 80番ポートを解放する必要がある
 ```
 
+うまく起動できない場合
+
+```
+nginx: [emerg] bind() to 0.0.0.0:80 failed (98: Address already in use)
+(こういうメッセージのときは何かが 80 を利用 80 を使っているものを調べる)
+
+$ sudo lsof -i:80
+```
+
 ## 設定ファイルの設置
 
 nginx の設定ファイル

@@ -129,6 +129,133 @@ Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
 mysql>
 ```
 
+## CentOS6 (sakura vps 標準)
+
+### yum を使ったインストール
+
+基本的に yum を使った操作は管理者権限
+
+```
+$ sudo yum ... (一般ユーザーからは)
+
+# yum ... (root でログインか su コマンドで変身)
+```
+
+CentOS6 標準状態でインストール
+
+```
+# yum -y install mysql-server
+
+(古いバージョンだが 5.1 がインストール)
+$ mysql --version
+mysql  Ver 14.14 Distrib 5.1.73, for redhat-linux-gnu (x86_64) using readline 5.1
+
+(サービス起動確認)
+$ chkconfig --list mysqld
+
+(自動起動に)
+$ sudo chkconfig mysqld on
+$ chkconfig --list mysqld
+mysqld          0:off   1:off   2:on    3:on    4:on    5:on    6:off
+
+(起動)
+$ sudo /etc/rc.d/init.d/mysqld start
+```
+
+### 文字コードまわり
+
+5.1 は初期状態では latin1 になっている
+
+```
+$ mysql -uroot
+
+mysql> SELECT VERSION(), CURRENT_DATE;
++-----------+--------------+
+| VERSION() | CURRENT_DATE |
++-----------+--------------+
+| 5.1.73    | 2017-11-04   |
++-----------+--------------+
+1 row in set (0.00 sec)
+
+mysql> status
+--------------
+mysql  Ver 14.14 Distrib 5.1.73, for redhat-linux-gnu (x86_64) using readline 5.1
+
+Connection id:      2
+Current database:
+Current user:       root@localhost
+SSL:            Not in use
+Current pager:      stdout
+Using outfile:      ''
+Using delimiter:    ;
+Server version:     5.1.73 Source distribution
+Protocol version:   10
+Connection:     Localhost via UNIX socket
+Server characterset:    latin1
+Db     characterset:    latin1
+Client characterset:    latin1
+Conn.  characterset:    latin1
+UNIX socket:        /var/lib/mysql/mysql.sock
+Uptime:         5 min 45 sec
+
+Threads: 1  Questions: 7  Slow queries: 0  Opens: 15  Flush tables: 1  Open tables: 8  Queries per second avg: 0.20
+--------------
+
+(一旦 mysql ログアウトして設定ファイルを編集)
+
+(設定ファイルは基本的にオリジナルは保存した上で編集)
+$ sudo vi /etc/my.cnf
+
+(下記を参考に変更)
+
+-----
+[mysqld]
+datadir=/var/lib/mysql
+socket=/var/lib/mysql/mysql.sock
+user=mysql
+# Disabling symbolic-links is recommended to prevent assorted security risks
+symbolic-links=0
+
+# character-set
+default-character-set=utf8
+skip-character-set-client-handshake
+
+[mysqld_safe]
+log-error=/var/log/mysqld.log
+pid-file=/var/run/mysqld/mysqld.pid
+
+[client]
+default-character-set=utf8
+
+[mysql]
+default-character-set=utf8
+
+[mysqldump]
+default-character-set=utf8
+-----
+```
+
+もう一度上記を参考に mysql の status を確認
+
+```
+しかし、全てが latin1 から utf8 に変わるわけではない
+ただし、スキーマーを構築する時に DEFAULT CHARSET=utf8;
+をすれば、DB 側は utf8 になるようなのでこれ以上は深く追求しない
+5.1 はすでに古いバージョンなので、とりあえず動かしたい場合でなければ
+最近のバージョンを入れた方がいいだろう
+```
+
+### Perl から接続するためのモジュール
+
+Perl からの接続には DBD::mysql が必要になるがおそらくインストールに失敗する
+
+```
+(追加で yum を使ってインストール)
+$ sudo yum install mysql-devel
+```
+
+こちらでもインストールに失敗するようならさらにエラーログを調査
+
 # USAGE
 
 ## 最低限の使い方
@@ -550,3 +677,4 @@ $ mysql --user=hackers --password hackers < hackers_data_dump.sql
 
 - <http://dev.mysql.com/doc/refman/5.6/ja/> MySQL 5.6 リファレンスマニュアル (日本語)
 - <http://brew.sh/index_ja.html> Homebrew — macOS 用パッケージマネージャー
+- <https://qiita.com/blackowl/items/c692982d86ad359e410c> - mysql 文字コード参考記事

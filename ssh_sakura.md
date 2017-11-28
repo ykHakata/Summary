@@ -130,6 +130,9 @@ $ chmod 600 ~/.ssh/id_rsa.pub
 $ scp ~/.ssh/id_rsa.pub yonabemt@yonabemt.sakura.ne.jp:~/.ssh/authorized_keys
 (ファイルをレンタルサーバー側に転送 scp コマンドを使い、同時にファイル名も変更)
 
+(二つ目を追記したい場合はこちらのやり方)
+$ cat ~/.ssh/id_rsa.pub | ssh yonabemt@yonabemt.sakura.ne.jp 'cat >> ~/.ssh/authorized_keys'
+
 yonabemt@yonabemt.sakura.ne.jp's password:
 (パスワード入力)
 

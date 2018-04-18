@@ -143,7 +143,7 @@ carton exec をつけなければいけない事に注意
 
 ```
 (アプリケーション名は慣例的にキャメルスタイル)
-$ carton exec mojo generate app HackerzLab
+$ carton exec -- mojo generate app HackerzLab
 ```
 
 HackerzLab が hackerz_lab の用に変化する事に注意
